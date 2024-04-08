@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/pictures/rewolwer.png">
+    <title>Rewolwerowiec</title>
+</head>
+<body>
+
+<div class="start" th:if="${gracz1.imie == null or gracz2.imie == null}">
+    <form class="form" action="start" method="post">
+        <label for="chk" aria-hidden="true">Podaj swoje imię</label>
+        <input class="input" type="text" name="imie" placeholder="Imię" autocomplete="off" required="">
+        <button>Graj</button>
+    </form>
+</div>
+
+<div class="gracz1" th:if="${gracz1.imie != null}">
+    <p th:text="${gracz1.imie}"></p>
+    <img src="/pictures/gracz1.png" alt="Gracz1">
+</div>
+
+<div class="gracz2" th:if="${gracz2.imie != null}">
+    <p th:text="${gracz2.imie}"></p>
+    <img src="/pictures/gracz2.png" alt="Gracz2">
+</div>
+
+</body>
+</html>
