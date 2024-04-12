@@ -11,5 +11,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Gracz {
     String imie;
-
+    int score = 0;
 }

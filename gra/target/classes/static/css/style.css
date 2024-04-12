@@ -90,3 +90,30 @@ body p {
   display: flex;
   flex-direction: column;
 }
+
+.gracz1 button,
+.gracz2 button {
+    background-color: rgb(255, 179, 36);
+    font-size: 2rem;
+    color: #333;
+    font-weight: bold;
+    margin: 10px 0;
+    justify-content: center;
+    align-items: center;
+    display: block;
+    margin: 0 auto;
+}
+header {
+    text-align: center;
+    padding: 20px 0;
+    z-index: 3;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+
+
+

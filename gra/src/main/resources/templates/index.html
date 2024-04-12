@@ -8,24 +8,79 @@
     <title>Rewolwerowiec</title>
 </head>
 <body>
-
+<header>
+    <div id="countdown"></div>
+    <p th:text="${aktualnaRunda} + '/' + ${rundy}"></p>
+    <p th:if="${winnerName != null}" th:text="${graczwin}"></p>
+</header>
 <div class="start" th:if="${gracz1.imie == null or gracz2.imie == null}">
-    <form class="form" action="start" method="post">
+    <form class="form" action="start" method="post" onsubmit="hideStartDiv()">
         <label for="chk" aria-hidden="true">Podaj swoje imię</label>
         <input class="input" type="text" name="imie" placeholder="Imię" autocomplete="off" required="">
-        <button>Graj</button>
+        <button type="submit">Graj</button>
     </form>
 </div>
 
 <div class="gracz1" th:if="${gracz1.imie != null}">
     <p th:text="${gracz1.imie}"></p>
+    <p th:text="${gracz1.score}"></p>
     <img src="/pictures/gracz1.png" alt="Gracz1">
+    <button onclick="shoot('gracz1')">Strzał</button>
 </div>
 
 <div class="gracz2" th:if="${gracz2.imie != null}">
     <p th:text="${gracz2.imie}"></p>
+    <p th:text="${gracz2.score}"></p>
     <img src="/pictures/gracz2.png" alt="Gracz2">
+    <button onclick="shoot('gracz2')">Strzał</button>
 </div>
 
 </body>
+<script>
+  function hideStartDiv() {
+        document.querySelector('.start').style.display = 'none';
+    }
+
+   let isCountdownFinished = false;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        if (document.querySelectorAll('.gracz1').length > 0 && document.querySelectorAll('.gracz2').length > 0) {
+            countdown();
+        }
+    });
+
+    function countdown() {
+        var seconds = 3;
+        var countdownElement = document.getElementById("countdown");
+        var interval = setInterval(function() {
+            countdownElement.innerText = seconds;
+            seconds--;
+            if (seconds < 0) {
+                clearInterval(interval);
+                countdownElement.innerText = "Shoot!";
+                isCountdownFinished = true;
+            }
+        }, 1000);
+    }
+
+    function shoot(player) {
+        var shotTime = isCountdownFinished ? 1 : 0; // Określamy czas strzału (0 - przed odliczaniem, 1 - po odliczaniu)
+
+        fetch('/game/shoot?player=' + player + '&shotTime=' + shotTime, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            window.location.reload();
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+    }
+</script>
 </html>
