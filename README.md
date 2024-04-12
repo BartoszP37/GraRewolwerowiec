@@ -1,7 +1,7 @@
 # GraRewolwerowiec
 # Temat 
 GRA REWOLWEROWIEC DLA DWÓCH GRACZY
-#OPIS
+# OPIS
 Gra dla dwóch graczy polegająca na wykazaniu się refleksem. Gracze czekają na komendę strzał ten kto strzeli pierwszy wygrywa. W przypadku oddania strzału przed komendą punkt zdobywa przeciwnik.
 # Endpointy 
 `GET /` : wejście na stronę startową gry
